@@ -33,7 +33,7 @@ jobs:
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
       - run : |
-          cd ./dist/gh-pages
+          cd ./build
       - run : |
           git remote add -t gh-pages origin https://github.com/camt-mmit/2022_01-ci-di-my-angular-Ryoneme2.git \
           git pull origin gh-pages
