@@ -33,7 +33,8 @@ jobs:
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
       - run : |
-          cd ./build
+          cd ./build \
+          pwd
       - run : git init -b gh-pages .
       - run : |
           git remote add -t origin https://github.com/camt-mmit/2022_01-ci-cd-my-react-Ryoneme2.git \
