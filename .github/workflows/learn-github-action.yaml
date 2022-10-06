@@ -31,7 +31,7 @@ jobs:
       - run : mkdir -p ./build 
       - run : git init -b gh-pages ./build && cd ./build
       - run : |
-          git remote add -t gh-pages origin https://git:${{ github.token }}@github.com/${{ github.repository }}.git \
+          git remote add -t gh-pages https://git:${{ github.token }}@github.com/${{ github.repository }}.git \
           git pull origin gh-pages
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
       - run : cp ./build/index.html ./build/404.html
