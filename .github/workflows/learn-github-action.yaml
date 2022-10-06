@@ -32,7 +32,8 @@ jobs:
           git remote set-url origin \
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
       - run : |
-          cd ./dist/gh-pages \
+          cd ./dist/gh-pages
+      - run : |
           git remote add -t gh-pages origin https://github.com/camt-mmit/2022_01-ci-di-my-angular-Ryoneme2.git \
           git pull origin gh-pages
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
