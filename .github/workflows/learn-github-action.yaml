@@ -35,10 +35,9 @@ jobs:
       - run : |
           cd ./build
       - run : |
-          git remote add -t gh-pages origin https://github.com/camt-mmit/2022_01-ci-cd-my-react-Ryoneme2.git \
+          git remote add -t gh-pages https://github.com/camt-mmit/2022_01-ci-cd-my-react-Ryoneme2.git \
           git pull origin gh-pages
-      - run : cd ..
-      - run : cp ./build/index.html ./build/404.html
+      - run : cp ./index.html ./404.html
       - run : |
           git add . \
           git commit -m "Manually commit" \
