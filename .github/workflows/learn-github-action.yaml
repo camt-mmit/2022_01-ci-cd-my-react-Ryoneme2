@@ -31,4 +31,13 @@ jobs:
       - run : |
           git remote set-url origin \
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
-      - run : yarn deploy
+      - run : |
+          cd ./dist/gh-pages \
+          git remote add -t gh-pages origin https://github.com/camt-mmit/2022_01-ci-di-my-angular-Ryoneme2.git \
+          git pull origin gh-pages
+      - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
+      - run : cp ./build/index.html ./build/404.html
+      - run : |
+          git add . \
+          git commit -m "Manually commit" \
+          git push origin gh-pages \

@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --configuration=production --base-href=/2022_01-ci-cd-my-react-Ryoneme2/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "react-scripts build --configuration=production --base-href=/2022_01-ci-cd-my-react-Ryoneme2/ && cp ./build/index.html ./build/404.html && gh-pages -d ./build"
