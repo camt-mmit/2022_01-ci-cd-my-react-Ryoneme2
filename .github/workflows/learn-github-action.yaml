@@ -5,15 +5,6 @@ on:
     branches:
       - "main"
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps: 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14' 
-      - run: npm install -g bats
-      - run: bats -v
   deploy-gh-pages:
     runs-on : ubuntu-latest
     steps:
@@ -23,7 +14,7 @@ jobs:
       - uses : actions/setup-node@v3
         with : 
           node-version : 16
-      - run : git remote rm origin
+      # - run : git remote rm origin
       - run : |
           git config --global user.email "${{ github.event.pusher.email }}"
           git config --global user.name "${{ github.actor }}"
@@ -33,9 +24,10 @@ jobs:
       - run : mkdir -p ./gh-pages
       - run : git init -b gh-pages ./gh-pages && cd ./gh-pages
       - run : git remote add -t gh-pages origin https://git:${{ github.token }}@github.com/${{ github.repository }}.git
+      - run : git pull origin gh-pages
       - run : rm -rf ./*
       - run : cp -rf ../build/* ./
-      - run : |
-          git add . && \
-          git commit -m "Manually commit" && \
-          git push origin gh-pages
+      - run : git add .
+      - run : git commit -m "Manually commit" && \
+      - run : git push origin gh-pages
+          
