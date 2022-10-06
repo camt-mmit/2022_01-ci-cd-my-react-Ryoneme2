@@ -28,8 +28,8 @@ jobs:
           git config --global user.name "${{ github.actor }}"
       - run : npm install -g yarn
       - run : yarn
-      - run : mkdir -p ./build
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
+      - run : mkdir -p ./build
       - run : git init -b gh-pages ./build && cd ./build
       - run : git remote add -t gh-pages origin https://git:${{ github.token }}@github.com/${{ github.repository }}.git
       - run : git pull origin gh-pages
