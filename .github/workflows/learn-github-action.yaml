@@ -32,14 +32,11 @@ jobs:
           git remote set-url origin \
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
+      - run : git init -b gh-pages ./build
       - run : |
-          cd ./build \
-          pwd
-      - run : git init -b gh-pages .
-      - run : |
-          git remote add -t origin https://github.com/camt-mmit/2022_01-ci-cd-my-react-Ryoneme2.git \
+          git remote add -t gh-pages origin https://github.com/camt-mmit/2022_01-ci-cd-my-react-Ryoneme2.git \
           git pull origin gh-pages
-      - run : cp ./index.html ./404.html
+      - run : cp ./build/index.html ./build/404.html
       - run : |
           git add . \
           git commit -m "Manually commit" \
