@@ -6,7 +6,7 @@ on:
       - "main"
 jobs:
   check-bats-version:
-    runs-on: 'macos-12'
+    runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -14,3 +14,21 @@ jobs:
           node-version: '14' 
       - run: npm install -g bats
       - run: bats -v
+  deploy-gh-pages:
+    runs-on : ubuntu-latest
+    steps:
+      - uses : actions/checkout@v3
+        with:
+          token : ${{ github.token }}
+      - uses : actions/setup-node@v3
+        with : 
+          node-version : 16
+      - run : |
+          git config --global user.email "${{ github.event.pusher.email }}"
+          git config --global user.name "${{ github.actor }}"
+      - run : npm install -g yarn
+      - run : yarn
+      - run : |
+          git remote set-url origin \
+          https://git:${{ github.token }}@github.com/${{ github.repository }}.git
+      - run : yarn deploy
