@@ -21,13 +21,15 @@ jobs:
       - run : npm install -g yarn
       - run : yarn
       - run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
-      - run : mkdir -p ./gh-pages
-      - run : git init -b gh-pages ./gh-pages && cd ./gh-pages
-      - run : git remote add -t gh-pages origin https://git:${{ github.token }}@github.com/${{ github.repository }}.git
-      - run : git pull origin gh-pages
-      - run : rm -rf ./*
-      - run : cp -rf ../build/* ./
-      - run : git add .
-      - run : git commit -m "Manually commit" && \
-      - run : git push origin gh-pages
+      - name : deploy
+        run: |
+          cd ./build
+          git init -b gh-pages
+          git remote add -t gh-pages origin \
+          https://git:${{ github.token }}@github.com/${{ github.repository }}.git
+          git fetch -u origin gh-pages:gh-pages
+          git add .
+          git commit -m "${{ github.actor }} deploy"
+          git push origin gh-pages -f
+          cd..
           
