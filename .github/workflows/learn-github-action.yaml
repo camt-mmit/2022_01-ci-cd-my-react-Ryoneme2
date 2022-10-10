@@ -58,7 +58,7 @@ jobs:
             https://git:${{ github.token }}@github.com/${{ github.repository }}.git
             git fetch -u origin gh-pages:gh-pages
             git add .
-            git commit -m "${{ github.actor }} deploy" || echo "nothing change on commit exit 0"
+            git commit -m "${{ github.actor }} deploy" || echo "nothing change on commit && exit 0"
             git push origin gh-pages -f
             cd ..   
           
