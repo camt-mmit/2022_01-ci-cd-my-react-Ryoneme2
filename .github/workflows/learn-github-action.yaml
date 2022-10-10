@@ -26,7 +26,9 @@ jobs:
       - name : Run unit test
         run : yarn test
       - name: Merge
-        run : git merge ci
+        run : |
+          git fetch --unshallow
+          git merge ci
           
   # deploy-gh-pages:
   #   runs-on : ubuntu-latest
