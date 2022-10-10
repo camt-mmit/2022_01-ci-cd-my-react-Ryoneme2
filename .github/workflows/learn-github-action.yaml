@@ -44,7 +44,6 @@ jobs:
           with : 
             node-version : 16
             cache : 'yarn'
-        # - run : git remote rm origin
         - run : |
             git config --global user.email "${{ github.event.pusher.email }}"
             git config --global user.name "${{ github.actor }}"
@@ -59,7 +58,7 @@ jobs:
             https://git:${{ github.token }}@github.com/${{ github.repository }}.git
             git fetch -u origin gh-pages:gh-pages
             git add .
-            git commit -m "${{ github.actor }} deploy"
+            git commit -m "${{ github.actor }} deploy" || echo "nothing change on commit exit 0"
             git push origin gh-pages -f
             cd ..   
           
