@@ -27,7 +27,6 @@ jobs:
         run : yarn test
       - name : merge
         run : |
-          git checkout main
           git pull
           git merge ci
           git push
