@@ -15,7 +15,7 @@ function App() {
           target='_blank'
           rel='noopener noreferrer'
         >
-          learn react Deploy with secret2
+          learn react Deploy with secret2 ก็ขอนิดหนึ่งได้มั้ยล่ะ
         </a>
       </header>
     </div>
