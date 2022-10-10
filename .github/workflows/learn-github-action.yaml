@@ -25,8 +25,8 @@ jobs:
         run : PUBLIC_URL=/${{ github.event.repository.name }} yarn build
       - name : Run unit test
         run : yarn test
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+      - name: Merge
+        run : git merge ci
           
   # deploy-gh-pages:
   #   runs-on : ubuntu-latest
