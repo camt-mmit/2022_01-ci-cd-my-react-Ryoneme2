@@ -15,7 +15,7 @@ function App() {
           target='_blank'
           rel='noopener noreferrer'
         >
-          Learn React workflow test force22
+          Learn React workflow test forc2
         </a>
       </header>
     </div>
