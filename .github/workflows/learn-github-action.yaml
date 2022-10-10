@@ -28,6 +28,7 @@ jobs:
       - name: Merge
         run : |
           git fetch --unshallow
+          git checkout main
           git merge ci
           
   # deploy-gh-pages:
