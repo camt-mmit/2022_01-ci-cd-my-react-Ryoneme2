@@ -26,7 +26,11 @@ jobs:
       - name : Run unit test
         run : yarn test
       - name : merge
-        run : git merge
+        run : |
+          git checkout main
+          git pull
+          git merge ci
+          git push
   # deploy-gh-pages:
   #   runs-on : ubuntu-latest
   #   steps:
