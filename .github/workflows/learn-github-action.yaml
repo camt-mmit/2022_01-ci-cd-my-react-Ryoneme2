@@ -20,7 +20,7 @@ jobs:
           git config --global user.email "${{ github.event.pusher.email }}"
           git config --global user.name "${{ github.actor }}"
       - run : npm install -g yarn
-      - name : Install dependentcy
+      - name : Install dependency
         run : yarn --frozen-lockfile
       - name : Run unit test
         run : yarn test
@@ -61,4 +61,39 @@ jobs:
             git commit -m "${{ github.actor }} deploy" || echo "nothing change on commit && exit 0"
             git push origin gh-pages -f
             cd ..   
-          
+  push-docker : 
+    runs-on : ubuntu-latest
+    steps:
+      - name : checkout
+        run : actions/checkout@v3
+
+      - name : login to docker hub
+        run : docker/login-action@v2
+        with : 
+          username : ${{ secrets.DOCKER_HUB_USERNAME }}
+          password : ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name : setup nodejs
+        run : actions/setup-node@v3
+        with : 
+          node-version : 16
+
+      - name : install yarn
+        run : npm install -g yarn
+
+      - name : install dependency
+        run : yarn
+
+      - name : build project
+        run : yarn build
+
+      - name : docker run buildx
+        run : docker/setup-buildx-action@v2
+
+      - name : build and push
+        run : docker/build-push-action@v3
+        with :
+          context : .
+          file : Dockerfile
+          push : true
+          tags : ${{ secrets.DOCKER_HUB_USERNAME }}/react-simple-ci-cd:latest
